@@ -1,0 +1,433 @@
+﻿<Page
+    x:Class="bandApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:bandApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <!-- Displays the bottom Commans -->
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Compact" >
+            <AppBarButton Label="Connect" Click="connect_Click" HorizontalAlignment="Center">
+                <TextBlock Text="&#xE702;" FontFamily="Segoe MDL2 Assets"
+                           FontSize="22"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </AppBarButton>
+            <AppBarButton Label="Accept" Click="save_Click" >
+                <SymbolIcon Symbol="Accept"/>
+            </AppBarButton>
+            <AppBarButton Label="Cancel" Click="reset_Click" >
+                <SymbolIcon Symbol="Cancel"/>
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid x:Name="rootGrid" 
+          Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".55*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height=".6*"></RowDefinition>
+            <RowDefinition Height=".7*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="HeaderText" Text="Band Manager" 
+                Style="{ThemeResource TitleTextBlockStyle}"
+                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                Grid.Row="0"
+                />
+
+        <!--Grid Base-->
+        <Grid Grid.Row="1" Tag="gBase"
+              Tapped="Grid_Tapped" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.0*"></ColumnDefinition>
+                <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <RelativePanel Width="auto" Height="auto" Grid.Column="0" >
+                <Ellipse x:Name="eBase" 
+                     Width="{Binding ElementName=HeaderText, Path=ActualHeight}"
+                     Height="{Binding Width, RelativeSource={RelativeSource Self}}"
+                     Fill="{StaticResource BaseColor}" RelativePanel.AlignVerticalCenterWithPanel="True"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     Margin="5 0 10 0"
+                     />
+
+                <TextBlock Text="Base" RelativePanel.RightOf="eBase" RelativePanel.AlignVerticalCenterWith="eBase"
+                          Style="{ThemeResource CaptionTextBlockStyle}"
+                           FontWeight="SemiBold"/>
+
+            </RelativePanel>
+            <TextBlock Grid.Column="1"
+                       Text="Tile Background"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Style="{ThemeResource CaptionTextBlockStyle}" />
+
+            <Grid Grid.Row="0" Grid.Column="2" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="{Binding ElementName=eBase, Path=Fill}" Grid.Column="0" Width="auto" Height="auto" Margin="1" RadiusX="2" RadiusY="2"/>
+                <Rectangle Fill="{Binding ElementName=eBase, Path=Fill}" Grid.Column="1" Width="auto" Height="auto" Margin="1" RadiusX="2" RadiusY="2"/>
+                <Rectangle Fill="{Binding ElementName=eBase, Path=Fill}" Grid.Column="2" Width="auto" Height="auto" Margin="1" RadiusX="2" RadiusY="2"/>
+
+                <TextBlock Text="&#xE200;" FontFamily="Segoe UI Symbol"
+                           FontSize="18" Grid.Column="0" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <TextBlock Text="&#xE13A;" FontFamily="Segoe UI Symbol"
+                           FontSize="22" Grid.Column="1"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <TextBlock Text="&#xE28c;" FontFamily="Segoe UI Symbol"
+                           FontSize="24" Grid.Column="2"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                
+                
+            </Grid>
+
+        </Grid>
+
+        <!--Grid HighContrast-->
+        <Grid Grid.Row="2"  Tag="gHighContrast" Tapped="Grid_Tapped" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.0*"></ColumnDefinition>
+                <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <RelativePanel Width="auto" Height="auto" Grid.Column="0" >
+                <Ellipse x:Name="eHighContrast" 
+                     Width="{Binding ElementName=HeaderText, Path=ActualHeight}"
+                     Height="{Binding Width, RelativeSource={RelativeSource Self}}"
+                     Fill="{StaticResource HighContrastColor}" RelativePanel.AlignVerticalCenterWithPanel="True"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     Margin="5 0 10 0"
+                     />
+                <TextBlock Text="High Contrast" RelativePanel.RightOf="eHighContrast" RelativePanel.AlignVerticalCenterWith="eHighContrast"
+                           Style="{ThemeResource CaptionTextBlockStyle}"
+                           FontWeight="SemiBold" TextWrapping="WrapWholeWords"/>
+
+            </RelativePanel>
+            <TextBlock Grid.Column="1"
+                       Text="Tile Background [New Content]"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Style="{ThemeResource CaptionTextBlockStyle}" />
+
+            <Grid Grid.Column="2" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="{Binding ElementName=eHighContrast, Path=Fill}" Grid.Column="0" Width="auto" Height="auto" Margin="1" RadiusX="2" RadiusY="2"/>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 5 0 0">
+                    
+                    <TextBlock Text="&#xE200;" FontFamily="Segoe UI Symbol"
+                           FontSize="14" Grid.Column="0" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="6" Grid.Column="0"
+                               HorizontalAlignment="Center"
+                               Foreground="White" 
+                               Style="{ThemeResource TitleTextBlockStyle}"/>
+
+                </StackPanel>
+                <Rectangle Fill="{Binding ElementName=eBase, Path=Fill}" Grid.Column="1" Width="auto" Height="auto" Margin="1" RadiusX="2" RadiusY="2"/>
+                <Rectangle Fill="{Binding ElementName=eBase, Path=Fill}" Grid.Column="2" Width="auto" Height="auto" Margin="1" RadiusX="2" RadiusY="2"/>
+
+                <TextBlock Text="&#xE13A;" FontFamily="Segoe UI Symbol"
+                           FontSize="22" Grid.Column="1"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <TextBlock Text="&#xE28c;" FontFamily="Segoe UI Symbol"
+                           FontSize="24" Grid.Column="2"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+
+        </Grid>
+
+
+        <!--Grid  Lowlight-->
+        <Grid Grid.Row="3"  Tag="gLowLight" Tapped="Grid_Tapped" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.0*"></ColumnDefinition>
+                <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+
+            <RelativePanel Width="auto" Height="auto" Grid.Column="0" >
+                <Ellipse x:Name="eLowLight" 
+                     Width="{Binding ElementName=HeaderText, Path=ActualHeight}"
+                     Height="{Binding Width, RelativeSource={RelativeSource Self}}"
+                     Fill="{StaticResource LowLightColor}" RelativePanel.AlignVerticalCenterWithPanel="True"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     Margin="5 0 10 0"
+                     />
+                <TextBlock Text="Lowlight" RelativePanel.RightOf="eLowLight" RelativePanel.AlignVerticalCenterWith="eLowLight"
+                          Style="{ThemeResource CaptionTextBlockStyle}"
+                           FontWeight="SemiBold"/>
+
+            </RelativePanel>
+            <TextBlock Grid.Column="1"
+                       Text="Tile Background [Pressed]"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Style="{ThemeResource CaptionTextBlockStyle}" />
+
+            <Grid Grid.Column="2" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="{Binding ElementName=eLowLight, Path=Fill}" Grid.Column="0" Width="auto" Height="auto" Margin="1" RadiusX="2" RadiusY="2"/>
+                <Rectangle Fill="{Binding ElementName=eBase, Path=Fill}" Grid.Column="1" Width="auto" Height="auto" Margin="1" RadiusX="2" RadiusY="2"/>
+                <Rectangle Fill="{Binding ElementName=eBase, Path=Fill}" Grid.Column="2" Width="auto" Height="auto" Margin="1" RadiusX="2" RadiusY="2"/>
+
+                <TextBlock Text="&#xE200;" FontFamily="Segoe UI Symbol"
+                           FontSize="18" Grid.Column="0" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <TextBlock Text="&#xE13A;" FontFamily="Segoe UI Symbol"
+                           FontSize="22" Grid.Column="1"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <TextBlock Text="&#xE28c;" FontFamily="Segoe UI Symbol"
+                           FontSize="24" Grid.Column="2"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+
+        </Grid>
+        
+        <!--Grid  Highlight-->
+        <Grid Grid.Row="4"  Tag="gHighlight" Tapped="Grid_Tapped" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.0*"></ColumnDefinition>
+                <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <RelativePanel Width="auto" Height="auto" Grid.Column="0" >
+                <Ellipse x:Name="eHighlight"
+                     Width="{Binding ElementName=HeaderText, Path=ActualHeight}"
+                     Height="{Binding Width, RelativeSource={RelativeSource Self}}"
+                     Fill="{StaticResource HighlightColor}" RelativePanel.AlignVerticalCenterWithPanel="True"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     Margin="5 0 10 0" />
+                <TextBlock Text="Highlight" RelativePanel.RightOf="eHighlight" RelativePanel.AlignVerticalCenterWith="eHighlight"
+                          Style="{ThemeResource CaptionTextBlockStyle}"
+                           FontWeight="SemiBold"/>
+
+            </RelativePanel>
+
+
+            <TextBlock Grid.Column="1"
+                       Text="Header"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Style="{ThemeResource CaptionTextBlockStyle}" />
+
+            <Grid Grid.Column="2" Margin="5" Tag="gHighlight">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".15*"></ColumnDefinition>
+                    <ColumnDefinition Width=".85*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Rectangle x:Name="bgRectHighlight" Fill="Black" 
+                           Grid.ColumnSpan="2" RadiusX="2" RadiusY="2"
+                           Stroke="{Binding ElementName=eHighlight, Path=Fill}" 
+                           StrokeThickness=".5" />
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 3 0 0" >
+
+                    <TextBlock Text="&#xE2A4;" FontFamily="Segoe UI Symbol"
+                           FontSize="10" Grid.Column="0" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                </Grid>
+                <Line  X1="0" Y1="0"  X2="0" Y2="{Binding ElementName=bgRectHighlight, Path=ActualHeight}"
+                       Stroke="{Binding ElementName=eHighlight, Path=Fill}" StrokeThickness="1"  
+                       Grid.Column="0" HorizontalAlignment="Right"
+                       Margin="0 1"
+                       />
+                <Grid Grid.Column="1" Margin="5 0 5 5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".35*"/>
+                        <RowDefinition Height=".65*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Keerat Singh" 
+                               Foreground="{Binding ElementName=eHighlight, Path=Fill}"
+                               Style="{ThemeResource CaptionTextBlockStyle}"
+                               Grid.Row="0" Height="auto"/>
+                    <TextBlock Text="Microsoft Band 2 rocks!" Foreground="White"
+                               Style="{ThemeResource CaptionTextBlockStyle}"
+                               Grid.Row="1" Height="auto"/>
+                </Grid>
+                
+            </Grid>
+
+        </Grid>
+        <!--Grid  Muted-->
+        <Grid Grid.Row="5" Tag="gMuted" Tapped="Grid_Tapped" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.0*"></ColumnDefinition>
+                <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <RelativePanel Width="auto" Height="auto" Grid.Column="0"  >
+                <Ellipse x:Name="eMuted"
+                     Width="{Binding ElementName=HeaderText, Path=ActualHeight}"
+                     Height="{Binding Width, RelativeSource={RelativeSource Self}}"
+                     Fill="{StaticResource MutedColor}" RelativePanel.AlignVerticalCenterWithPanel="True"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     Margin="5 0 10 0" />
+                <TextBlock Text="Muted" RelativePanel.RightOf="eMuted" RelativePanel.AlignVerticalCenterWith="eMuted"
+                          Style="{ThemeResource CaptionTextBlockStyle}"
+                           FontWeight="SemiBold"/>
+
+            </RelativePanel>
+
+
+            <TextBlock Grid.Column="1"
+                       Text="Toggle on state"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Style="{ThemeResource CaptionTextBlockStyle}" />
+
+            <Grid Grid.Column="2" Margin="5">
+                    <Rectangle x:Name="bgRectMuted" Fill="{Binding ElementName=eBase, Path=Fill}" Grid.ColumnSpan="2" Margin="1" RadiusX="2" RadiusY="2"/>
+                    <RelativePanel x:Name="rpMuted">
+                    <Ellipse x:Name="eMutedDisp"
+                     Width="{Binding ElementName=txtDetail, Path=ActualHeight}"
+                     Height="{Binding Width, RelativeSource={RelativeSource Self}}"
+                     Margin=" 5 0 5 0 "
+                     Fill="{Binding ElementName=eMuted, Path=Fill}" 
+                     RelativePanel.AlignVerticalCenterWithPanel="True"  
+                      />
+
+                   
+                       
+                     
+                    <TextBlock Text="10" x:Name="txtMutedAbove"
+                               RelativePanel.AlignHorizontalCenterWith="eMutedDisp"
+                               RelativePanel.AlignVerticalCenterWith="eMutedDisp"
+                               Foreground="White" Margin="0 -10 0 -5"
+                               Style="{ThemeResource SubtitleTextBlockStyle}"
+                               />
+                    <TextBlock Text="mi"
+                               RelativePanel.Below="txtMutedAbove"
+                               RelativePanel.AlignHorizontalCenterWith="eMutedDisp"
+                               Foreground="White"
+                               FontSize="7"/>
+                    <TextBlock Text="21.5" x:Name="txtDetail"
+                               RelativePanel.RightOf="eMutedDisp"
+                               RelativePanel.AlignVerticalCenterWith="eMutedDisp"
+                               Foreground="White" Margin="0 -10 0 -5"
+                               Style="{ThemeResource TitleTextBlockStyle}"
+                               FontWeight="SemiBold"
+                               />
+                </RelativePanel>
+
+            </Grid>
+
+        </Grid>
+        <!--Grid Secondary-->
+        <Grid Grid.Row="6"  Tag="gSecondary" Tapped="Grid_Tapped" PointerEntered="Grid_PointerEntered" PointerExited="Grid_PointerExited" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.0*"></ColumnDefinition>
+                <ColumnDefinition Width="1.8*"></ColumnDefinition>
+                <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <RelativePanel Width="auto" Height="auto" Grid.Column="0" >
+                <Ellipse x:Name="eSecondary"
+                     Width="{Binding ElementName=HeaderText, Path=ActualHeight}"
+                     Height="{Binding Width, RelativeSource={RelativeSource Self}}"
+                     Fill="{StaticResource SecondaryColor}" RelativePanel.AlignVerticalCenterWithPanel="True"
+                     RelativePanel.AlignLeftWithPanel="True"
+                     Margin="5 0 5 0" />
+                <TextBlock Text="Secondary" RelativePanel.RightOf="eSecondary" RelativePanel.AlignVerticalCenterWith="eSecondary"
+                          Style="{ThemeResource CaptionTextBlockStyle}"
+                           FontWeight="SemiBold"/>
+            </RelativePanel>
+
+
+            <TextBlock Grid.Column="1"
+                       Text="Secondary 
+                       Text Color"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                       Style="{ThemeResource CaptionTextBlockStyle}" />
+
+            <Grid Grid.Column="2" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".15*"></ColumnDefinition>
+                    <ColumnDefinition Width=".85*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Rectangle x:Name="bgRectButtons" Fill="Black" 
+                           Grid.ColumnSpan="2"
+                           RadiusX="2" RadiusY="2"
+                           Stroke="{Binding ElementName=eSecondary, Path=Fill}" StrokeThickness="1"/>
+                <StackPanel>
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 3 0 0" >
+
+                        <TextBlock Text="&#xE2A4;" FontFamily="Segoe UI Symbol"
+                           FontSize="10" Grid.Column="0" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    </Grid>
+                </StackPanel>
+                <Line  X1="0" Y1="0"  X2="0" Y2="{Binding ElementName=bgRectHighlight, Path=ActualHeight}"
+                       Stroke="{Binding ElementName=eHighlight, Path=Fill}" StrokeThickness="1"  
+                       Grid.Column="0" HorizontalAlignment="Right"
+                       Margin="0 1"
+                       />
+                <Grid Grid.Column="1" Margin="5 0 5 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".3*"  />
+                        <RowDefinition Height=".3*" />
+                        <RowDefinition Height=".4*" />
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Keerat Singh" 
+                               Foreground="{Binding ElementName=eHighlight, Path=Fill}"
+                               Style="{ThemeResource CaptionTextBlockStyle}"
+                               Grid.Row="0" 
+                               />
+                    <TextBlock Text="Missed Call" Foreground="White"
+                               Style="{ThemeResource CaptionTextBlockStyle}"
+                               Grid.Row="1" />
+                    <TextBlock Text="1 min ago"
+                               Style="{ThemeResource CaptionTextBlockStyle}"
+                               Grid.Row="2" 
+                               Foreground="{Binding ElementName=eSecondary, Path=Fill}"/>
+                    
+                </Grid>
+
+            </Grid>
+            
+        </Grid>
+
+        <!--Stack Status-->
+        <StackPanel Grid.Row="7" Orientation="Horizontal" 
+                    HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 5 0 0">
+        <ProgressRing x:Name="progressStatus"
+                      IsActive="False" Margin="0 0 10 0"
+                      Foreground="{Binding ElementName=eBase, Path=Fill}"
+                     />
+        <TextBlock x:Name="txtStatus"
+                Style="{ThemeResource CaptionTextBlockStyle}"
+                />
+        </StackPanel>
+       
+    </Grid>
+</Page>

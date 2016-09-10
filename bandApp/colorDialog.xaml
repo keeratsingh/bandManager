@@ -1,0 +1,43 @@
+﻿<ContentDialog
+    x:Class="bandApp.colorDialog"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:local="using:bandApp"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               x:Name="ContentDialog"
+               Title="Enter Color"
+               PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+               PrimaryButtonText="Ok"
+               SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+               SecondaryButtonText="Cancel"
+               Closing="ContentDialog_Closing"
+               mc:Ignorable="d">
+
+    <StackPanel Margin="0 20 0 0" x:Name="spRoot" Width="auto">
+            <ComboBox Name="cmbColors" Visibility="Visible" Grid.Column="0" Width="270" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <!--<StackPanel x:Name="spRGB" Orientation="Horizontal" Visibility="Visible"
+                    >
+            
+            <TextBox x:Name="txtR" Height="auto" Width="auto" PlaceholderText="R" MaxLength="3" Text="0"  />
+            <TextBox x:Name="txtG" Height="auto" Width="auto" PlaceholderText="G" MaxLength="3" Text="0" />
+            <TextBox x:Name="txtB" Height="auto" Width="auto" PlaceholderText="B" MaxLength="3" Text="0" />
+        </StackPanel>-->
+        <TextBox Name="txtHex" PlaceholderText="#HexCode" MaxLength="7" />
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+            <RadioButton x:Name="rbColorName" Content="Color Palette" GroupName="rbColor" IsChecked="True" Checked="rbColorName_Checked"/>
+            <RadioButton x:Name="rbCustomColor" Content="Hex Value" GroupName="rbColor" Checked="rbRGB_Checked"/>
+        </StackPanel>
+        <TextBlock x:Name="txtStatus" Foreground="Red" />
+    </StackPanel>
+</ContentDialog>
