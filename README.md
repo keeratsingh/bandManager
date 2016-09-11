@@ -3,10 +3,12 @@ This idea was on the back burner for quite a while, and I never had the time to 
 This post will help you guide through the Band SDK functions used to retrieve and update the BandTheme. There are 8 color classes that exist on the Band, however, only 6 of the 8 can be customized using the Band SDK.
 
 # Features
-• Customize all 6 Band color classes individually
-• 
-• 
-• 
+* Customize all 6 Band color classes individually
+* Choose from over **141 colors**
+* Define a custom color using Hex Value
+* App UI reflects the band UI
+* UWP app works across all supported Windows 10 Devices 
+
 # Screenshots
 ![Alt text](/screenshots/Connecting_to_the_Band.jpg?raw=true "Connecting to Microsoft Band")
 ![Alt text](/screenshots/Theme_Retrieved.jpg?raw=true "Connected and successfully retrieved the BandTheme")
